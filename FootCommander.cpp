@@ -7,7 +7,7 @@
 using namespace std;
 
 void WarGame::FootCommander::heal() {
-    this->currHealth = maxHealth;
+    this->setCurrHealth(maxHealth);
 }
 
 std::pair<int, int> WarGame::FootCommander::getEnemyLoc(vector<std::vector<Soldier *>> &board) {

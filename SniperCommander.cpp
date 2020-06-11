@@ -4,7 +4,7 @@
 using namespace std;
 
 void WarGame::SniperCommander::heal() {
-    this->currHealth = maxHealth;
+    this->setCurrHealth(maxHealth);
 }
 
 std::pair<int, int> WarGame::SniperCommander::getEnemyLoc(vector<std::vector<Soldier *>> &board) {

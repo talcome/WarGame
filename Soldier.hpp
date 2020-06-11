@@ -28,13 +28,9 @@ namespace WarGame {
             uint getCurrHealth() const{return this-> currHealth;}
             uint getDamage() const{return this-> damage;}
 
-            void setPlayerID(uint playerNum){this-> playerID = playerNum;}
             void setCurrHealth(uint ch){ this-> currHealth = ch;}
-            void setDamage(uint d){ this-> damage = d;}
 
             virtual std::pair<int,int> getEnemyLoc(std::vector<std::vector<Soldier*>> &board) = 0;
             virtual void attack(std::vector<std::vector<Soldier*>> &board, std::pair<int, int> source) = 0;
             virtual void heal() = 0;
     };
-
-} // end namespace WarGame
