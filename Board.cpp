@@ -48,7 +48,7 @@ namespace WarGame
 
       Soldier *t = board[N][M];
       if (t == nullptr) 
-        throw invalid_argument("Error: no soldier!");
+        throw invalid_argument("Error: this soldier is not exist!");
 
       if (t->getCurrHealth() <= 0){
           throw invalid_argument("Error: this soldier is already dead!");
@@ -59,8 +59,6 @@ namespace WarGame
         switch (direction) 
         {
           case Up:
-              if (N+1 == board.size())
-                  throw invalid_argument("Error: no soldier!");
               if (board[N+1][M] != nullptr)
                   throw invalid_argument("Error: no soldier!");
               board[N+1][M] = t;
@@ -69,8 +67,6 @@ namespace WarGame
               break;
 
           case Down:
-              if (N-1 == board.size())
-                  throw invalid_argument("Error: no soldier!");
               if (board[N-1][M] != nullptr)
                   throw invalid_argument("Error: no soldier!");
               board[N-1][M] = t;
@@ -79,8 +75,6 @@ namespace WarGame
               break;
 
           case Left:
-              if (M-1 == board.size())
-                  throw invalid_argument("Error: no soldier!");
               if (board[N][M-1] != nullptr)
                   throw invalid_argument("Error: no soldier!");
               board[N][M-1] = t;
@@ -89,8 +83,6 @@ namespace WarGame
               break;
 
           case  Right:
-                if (M+1 == board.size())
-                    throw invalid_argument("Error: no soldier!");
                 if (board[N][M+1] != nullptr)
                     throw invalid_argument("Error: no soldier!");
                 board[N][M+1] = t;
@@ -107,7 +99,7 @@ namespace WarGame
         int M = board[0].size();
         for (int i = 0; i < N; i++){
             for (int j = 0; j < M; j++){
-                if (board[i][j] != nullptr && board[i][j]->getPlayerID() == player_number && board[i][j]->getCurrHealth() != 0){
+                if (board[i][j] != nullptr && board[i][j]->getPlayerID() == player_number && board[i][j]->getCurrHealth() > 0){
                     return true;
                 }
             }
