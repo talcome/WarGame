@@ -31,7 +31,7 @@ std::pair<int, int> WarGame::ParamedicCommander::getEnemyLoc(vector<std::vector<
 void WarGame::ParamedicCommander::attack(vector<std::vector<Soldier *>> &board, std::pair<int, int> source) {
     WarGame::Paramedic::attack(board,source);
     std::pair<int,int> enemyLoc =  getEnemyLoc(board);
-    if(enemyLoc.first <= 0 || enemyLoc.second <= 0){
+    if(enemyLoc.first < 0 || enemyLoc.second < 0 || enemyLoc.first >= board.size() || enemyLoc.second >= board[0].size()){
         throw invalid_argument("couldn't find enemy");
     }
     Soldier* pal = board[enemyLoc.first][enemyLoc.second];
