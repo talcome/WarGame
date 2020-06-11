@@ -103,7 +103,6 @@ TEST_CASE("Move function - no Commander"){
             CHECK(p[{5,1}]==nullptr);
             CHECK(typeid(*p[{4,1}])== typeid(WarGame::Paramedic));
 
-
     p.move(2,{3,0},WarGame::Board::Right);
             CHECK(p[{3,0}]== nullptr);
             CHECK(typeid(*p[{3,1}])==typeid(WarGame::Sniper));
