@@ -38,6 +38,7 @@ void WarGame::FootSoldier::attack(vector<std::vector<Soldier *>> &board, std::pa
             delete enemy;
             board[enemyLoc.first][enemyLoc.second] = nullptr;
             std::cout << "your enemy is died" << endl;
+            return;
         }
     }
 }

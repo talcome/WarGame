@@ -36,6 +36,7 @@ void WarGame::SniperCommander::attack(vector<std::vector<Soldier *>> &board, std
             delete enemy;
             board[enemyLoc.first][enemyLoc.second] = nullptr;
             std::cout << "your enemy is died" << endl;
+            return;
         }
     }
 }

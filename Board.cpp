@@ -51,7 +51,7 @@ namespace WarGame
         throw invalid_argument("Error: no soldier!");
 
       if (t->getCurrHealth() <= 0){
-          throw invalid_argument("Error: this soldier is dead!");
+          throw invalid_argument("Error: this soldier is already dead!");
       }
 
       if (t->getPlayerID() == player_number)
