@@ -14,13 +14,11 @@ std::pair<int, int> WarGame::ParamedicCommander::getEnemyLoc(vector<std::vector<
     int M = board[0].size();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            if (board[i][j] != nullptr && this->getPlayerID() == board[i][j]->getPlayerID()){
-                if (board[i][j]->getCurrHealth() >= 0){
-                    uint dist = distance(N,M,i,j);
-                    if (dist < minDist){
-                        minDist = dist;
-                        pos = {i, j};
-                    }
+            if (board[i][j] != nullptr && this->getPlayerID() != board[i][j]->getPlayerID() && board[i][j]->getCurrHealth() > 0){
+                uint dist = distance(N,M,i,j);
+                if (dist < minDist){
+                    minDist = dist;
+                    pos = {i, j};
                 }
             }
         }
@@ -35,9 +33,10 @@ void WarGame::ParamedicCommander::attack(vector<std::vector<Soldier *>> &board, 
         throw invalid_argument("couldn't find enemy");
     }
     Soldier* pal = board[enemyLoc.first][enemyLoc.second];
-    if (pal != nullptr){
+    if (pal != nullptr && pal->getPlayerID() == this->getPlayerID()){
         pal->setCurrHealth(pal->getCurrHealth() + this->getDamage());
         std::cout << "healing soldier " << endl;
+        return;
     }
 }
 
