@@ -113,7 +113,7 @@ namespace WarGame
         int M = board[0].size();
         for (int i = 0; i < N; i++){
             for (int j = 0; j < M; j++){
-                if (board[i][j] != nullptr && board[i][j]->getPlayerID() == player_number && board[i][j]->getCurrHealth() <= 0){
+                if (board[i][j] != nullptr && board[i][j]->getPlayerID() == player_number && board[i][j]->getCurrHealth() != 0){
                     return true;
                 }
             }
