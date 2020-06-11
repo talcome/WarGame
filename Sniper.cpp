@@ -28,13 +28,11 @@ void WarGame::Sniper::attack(std::vector<std::vector<Soldier *>> &board, std::pa
         throw invalid_argument("couldn't find enemy");
     }
     Soldier* enemy = board[enemyLoc.first][enemyLoc.second];
-    if (enemy != nullptr){
-        enemy->setCurrHealth(enemy->getCurrHealth() - this->getDamage());
-        if(enemy->getCurrHealth() <= 0){
-            delete enemy;
-            board[enemyLoc.first][enemyLoc.second] = nullptr;
-            std::cout << "your enemy is died" << endl;
-            return;
-        }
+    enemy->setCurrHealth(enemy->getCurrHealth() - this->getDamage());
+    if(enemy->getCurrHealth() <= 0){
+        delete enemy;
+        board[enemyLoc.first][enemyLoc.second] = nullptr;
+        std::cout << "your enemy is died" << endl;
+        return;
     }
 }
