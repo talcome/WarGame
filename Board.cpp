@@ -46,7 +46,7 @@ namespace WarGame
       if (N <= 0| M <= 0)
           throw invalid_argument("Error: soldier step the board");
 
-      Soldier *t = this->board[N][M];
+      Soldier *t = board[N][M];
       if (t == nullptr) 
         throw invalid_argument("Error: no soldier!");
 
@@ -63,7 +63,7 @@ namespace WarGame
                   throw invalid_argument("Error: no soldier!");
               if (board[N+1][M] != nullptr)
                   throw invalid_argument("Error: no soldier!");
-              t = board[N+1][M];
+              board[N+1][M] = t;
               board[N][M] = nullptr;
               t->attack(this->board,{N+1,M});
               break;
@@ -75,7 +75,7 @@ namespace WarGame
                   throw invalid_argument("Error: no soldier!");
               if (board[N-1][M] != nullptr)
                   throw invalid_argument("Error: no soldier!");
-              t = board[N-1][M];
+              board[N-1][M] = t;
               board[N][M] = nullptr;
               t->attack(this->board,{N-1,M});
               break;
@@ -87,19 +87,19 @@ namespace WarGame
                   throw invalid_argument("Error: no soldier!");
               if (board[N][M-1] != nullptr)
                   throw invalid_argument("Error: no soldier!");
-              t = board[N][M-1];
+              board[N][M-1] = t;
               board[N][M] = nullptr;
               t->attack(this->board,{N,M-1});
               break;
 
           case  Right:
-              if (M-1 < 0)
+              if (M+1 < 0)
                   throw invalid_argument("Error: no soldier!");
-                if (M-1 == board.size())
+                if (M+1 == board.size())
                     throw invalid_argument("Error: no soldier!");
                 if (board[N][M+1] != nullptr)
                     throw invalid_argument("Error: no soldier!");
-                t = board[N][M+1];
+                board[N][M+1] = t;
                 board[N][M] = nullptr;
                 t->attack(this->board,{N,M+1});
                 break;
@@ -109,14 +109,15 @@ namespace WarGame
 
     // returns true iff the board contains one or more soldiers of the given player.
     bool Board::has_soldiers(uint player_number) const{
-      for (int i = 0; i < board.size(); i++){
-        for (int j = 0; j < board[0].size(); j++){
-          Soldier *s = board[i][j];
-          if (s != nullptr && s->getPlayerID() == player_number){
-            return true;
-          }
+        int N = board.size();
+        int M = board[0].size();
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < M; j++){
+                if (board[i][j] != nullptr && board[i][j]->getPlayerID() == player_number && board[i][j]->getCurrHealth() <= 0){
+                    return true;
+                }
+            }
         }
-      }
-      return false;
-    } 
+        return false;
+    }
 }
