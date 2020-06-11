@@ -14,13 +14,11 @@ std::pair<int, int> WarGame::FootSoldier::getEnemyLoc(vector<std::vector<Soldier
     int M = board[0].size();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            if (board[i][j] != nullptr && this->getPlayerID() != board[i][j]->getPlayerID()){
-                if (board[i][j]->getCurrHealth() >= 0){
-                    uint dist = distance(N,M,i,j);
-                    if (dist < minDist){
-                        minDist = dist;
-                        pos = {i, j};
-                    }
+            if (board[i][j] != nullptr && this->getPlayerID() != board[i][j]->getPlayerID() && board[i][j]->getCurrHealth() > 0){
+                uint dist = distance(N,M,i,j);
+                if (dist < minDist){
+                    minDist = dist;
+                    pos = {i, j};
                 }
             }
         }

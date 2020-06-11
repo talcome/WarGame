@@ -43,7 +43,7 @@ namespace WarGame
       if (N >= board.size() | M >= board[0].size() )
           throw invalid_argument("Error: soldier step the board");
 
-      if (N <= 0| M <= 0)
+      if (N < 0| M < 0)
           throw invalid_argument("Error: soldier step the board");
 
       Soldier *t = board[N][M];
@@ -69,8 +69,6 @@ namespace WarGame
               break;
 
           case Down:
-              if (N-1 < 0)
-                  throw invalid_argument("Error: no soldier!");
               if (N-1 == board.size())
                   throw invalid_argument("Error: no soldier!");
               if (board[N-1][M] != nullptr)
@@ -81,8 +79,6 @@ namespace WarGame
               break;
 
           case Left:
-              if (M-1 < 0)
-                  throw invalid_argument("Error: no soldier!");
               if (M-1 == board.size())
                   throw invalid_argument("Error: no soldier!");
               if (board[N][M-1] != nullptr)
@@ -93,8 +89,6 @@ namespace WarGame
               break;
 
           case  Right:
-              if (M+1 < 0)
-                  throw invalid_argument("Error: no soldier!");
                 if (M+1 == board.size())
                     throw invalid_argument("Error: no soldier!");
                 if (board[N][M+1] != nullptr)
