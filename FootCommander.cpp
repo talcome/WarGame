@@ -36,14 +36,12 @@ void WarGame::FootCommander::attack(vector<std::vector<Soldier *>> &board, std::
         throw invalid_argument("couldn't find enemy");
     }
     Soldier* enemy = board[enemyLoc.first][enemyLoc.second];
-    if (enemy != nullptr){
-        enemy->setCurrHealth(currHealth - this->getDamage());
-        if(enemy->getCurrHealth() <= 0){
-            delete enemy;
-            board[enemyLoc.first][enemyLoc.second] = nullptr;
-            std::cout << "your enemy is died" << endl;
-            return;
-        }
+    enemy->setCurrHealth(currHealth - this->getDamage());
+    if(enemy->getCurrHealth() <= 0){
+        delete enemy;
+        board[enemyLoc.first][enemyLoc.second] = nullptr;
+        std::cout << "your enemy is died" << endl;
+        return;
     }
 }
 
