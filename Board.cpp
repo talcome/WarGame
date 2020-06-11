@@ -40,56 +40,70 @@ namespace WarGame
       int N = source.first;
       int M = source.second;
 
-      if (N >= board.size() | M >= board[0].size() )
-          throw invalid_argument("Error: soldier step the board");
-
-      if (N < 0| M < 0)
-          throw invalid_argument("Error: soldier step the board");
+      if (N >= board.size() || M >= board[0].size() || N < 0 || M < 0)
+          throw invalid_argument("Error: location is out of bound");
 
       Soldier *t = board[N][M];
+
       if (t == nullptr) 
-        throw invalid_argument("Error: this soldier is not exist!");
+        throw invalid_argument("Error: no soldier on the board");
 
-      if (t->getCurrHealth() <= 0){
+      if (t->getCurrHealth() <= 0)
           throw invalid_argument("Error: this soldier is already dead!");
-      }
 
-      if (t->getPlayerID() == player_number)
-      {
-        switch (direction) 
-        {
+
+      if (t->getPlayerID() != player_number)
+          throw invalid_argument("Error: this soldier belong to the other player");
+
+
+      switch (direction){
           case Up:
-              if (board[N+1][M] == nullptr){
-                  board[N+1][M] = t;
-                  board[N][M] = nullptr;
-                  t->attack(this->board,{N+1,M});
-              }
+              if (N+1 == board.size())
+                  throw invalid_argument("Error: you cant move the other board");
+
+              if (board[N+1][M] != nullptr)
+                  throw invalid_argument("Error: there is a soldier over here");
+
+              board[N][M] = nullptr;
+              board[N+1][M] = t;
+              t->attack(this->board,{N+1,M});
               break;
 
           case Down:
-              if (board[N-1][M] == nullptr){
-                  board[N-1][M] = t;
-                  board[N][M] = nullptr;
-                  t->attack(this->board,{N-1,M});
-              }
+              if (N-1 < 0)
+                  throw invalid_argument("Error: you cant move out of the board");
+
+              if (board[N-1][M] != nullptr)
+                  throw invalid_argument("Error: no soldier!");
+
+              board[N][M] = nullptr;
+              board[N-1][M] = t;
+              t->attack(this->board,{N-1,M});
               break;
 
           case Left:
-              if (board[N][M-1] == nullptr){
-                  board[N][M-1] = t;
-                  board[N][M] = nullptr;
-                  t->attack(this->board,{N,M-1});
-              }
+              if (M-1 < 0)
+                  throw invalid_argument("Error: you cant move out of the board");
+
+              if (board[N][M-1] != nullptr)
+                  throw invalid_argument("Error: no soldier!");
+
+              board[N][M] = nullptr;
+              board[N][M-1] = t;
+              t->attack(this->board,{N,M-1});
               break;
 
           case  Right:
-                if (board[N][M+1] == nullptr){
-                    board[N][M+1] = t;
-                    board[N][M] = nullptr;
-                    t->attack(this->board,{N,M+1});
-                }
+                if (M+1 == board[0].size())
+                    throw invalid_argument("Error: you cant move the other board");
+
+                if (board[N][M+1] != nullptr)
+                    throw invalid_argument("Error: no soldier!");
+
+                board[N][M] = nullptr;
+                board[N][M+1] = t;
+                t->attack(this->board,{N,M+1});
                 break;
-        }
       }
     }
 
