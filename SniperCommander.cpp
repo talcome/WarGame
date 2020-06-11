@@ -14,12 +14,9 @@ std::pair<int, int> WarGame::SniperCommander::getEnemyLoc(vector<std::vector<Sol
     int M = board[0].size();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            if (board[i][j]->getCurrHealth() > maxPower){
+            if (board[i][j] != nullptr && this->getPlayerID() != board[i][j]->getPlayerID() && board[i][j]->getCurrHealth() > maxPower){
                 maxPower = board[i][j]->getCurrHealth();
-            }
-            if (board[i][j] != nullptr && this->getPlayerID() != board[i][j]->getPlayerID()){
-                if (board[i][j]->getCurrHealth() == maxPower)
-                    pos = {i, j};
+                pos = {i, j};
             }
         }
     }
