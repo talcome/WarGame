@@ -59,35 +59,35 @@ namespace WarGame
         switch (direction) 
         {
           case Up:
-              if (board[N+1][M] != nullptr)
-                  throw invalid_argument("Error: no soldier!");
-              board[N+1][M] = t;
-              board[N][M] = nullptr;
-              t->attack(this->board,{N+1,M});
+              if (board[N+1][M] == nullptr){
+                  board[N+1][M] = t;
+                  board[N][M] = nullptr;
+                  t->attack(this->board,{N+1,M});
+              }
               break;
 
           case Down:
-              if (board[N-1][M] != nullptr)
-                  throw invalid_argument("Error: no soldier!");
-              board[N-1][M] = t;
-              board[N][M] = nullptr;
-              t->attack(this->board,{N-1,M});
+              if (board[N-1][M] == nullptr){
+                  board[N-1][M] = t;
+                  board[N][M] = nullptr;
+                  t->attack(this->board,{N-1,M});
+              }
               break;
 
           case Left:
-              if (board[N][M-1] != nullptr)
-                  throw invalid_argument("Error: no soldier!");
-              board[N][M-1] = t;
-              board[N][M] = nullptr;
-              t->attack(this->board,{N,M-1});
+              if (board[N][M-1] == nullptr){
+                  board[N][M-1] = t;
+                  board[N][M] = nullptr;
+                  t->attack(this->board,{N,M-1});
+              }
               break;
 
           case  Right:
-                if (board[N][M+1] != nullptr)
-                    throw invalid_argument("Error: no soldier!");
-                board[N][M+1] = t;
-                board[N][M] = nullptr;
-                t->attack(this->board,{N,M+1});
+                if (board[N][M+1] == nullptr){
+                    board[N][M+1] = t;
+                    board[N][M] = nullptr;
+                    t->attack(this->board,{N,M+1});
+                }
                 break;
         }
       }
